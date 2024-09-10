@@ -69,8 +69,4 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem "devise", "~> 4.9"
-
-gem "email_validator", "~> 2.2"
-
-gem "strong_password", "~> 0.0.10"
+gem 'devise', '~> 4.9.2'
