@@ -25,16 +25,23 @@
           <div class="collapse navbar-collapse" id="mynavbar">
             <ul class="navbar-nav me-auto">
               <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0)">Home</a>
+                <%= link_to "Home", root_path, class: "btn btn-primary" %>               
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0)">Login</a>
+                <%= link_to "Our animals", pets_path, class: "btn btn-primary" %>             
+              </li>
+              <li>
+                <form class="d-flex">
+                  <input class="form-control me-2" type="text" placeholder="Search">
+                  <button class="btn btn-primary" type="button">Search</button>
+                </form>
+              </li>             
+             
+              <li class="nav-item">
+                <%= link_to "Login", root_path, class: "btn btn-primary" %> 
               </li>
             </ul>
-            <form class="d-flex">
-              <input class="form-control me-2" type="text" placeholder="Search">
-              <button class="btn btn-primary" type="button">Search</button>
-            </form>
+            
           </div>
         </div>
       </nav>
