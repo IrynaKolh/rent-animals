@@ -1,4 +1,5 @@
 class PetsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :edit, :create, :update, :destroy]
   before_action :set_pet, only: %i[ show edit update destroy ]
 
   # GET /pets or /pets.json
