@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :admins, skip: [:registrations]
   resources :pets
   devise_for :users
   root 'pages#index'

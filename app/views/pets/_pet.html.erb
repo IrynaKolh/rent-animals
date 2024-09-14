@@ -1,47 +1,49 @@
-<div id="<%= dom_id pet %>">
-  <p>
-    <strong>Name:</strong>
-    <%= pet.name %>
-  </p>
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-10 col-md-12">
+      <div class="row g-4">       
+        <div class="col-md-6 text-center">
+          <% if pet.image.present? %>
+            <%= image_tag pet.image, class: "img-fluid rounded" %>
+          <% else %>
+            <%= image_tag "default-img.png", class: "img-fluid rounded", alt: "Pet Image" %>
+          <% end %>
+        </div>
 
-  <p>
-    <strong>Description:</strong>
-    <%= pet.description %>
-  </p>
-
-  <p>
-    <strong>Price:</strong>
-    <%= pet.price %>
-  </p>
-
-  <p>
-    <strong>Age:</strong>
-    <%= pet.age %>
-  </p>
-
-  <p>
-    <strong>Category:</strong>
-    <%= pet.category %>
-  </p>
-
-  <p>
-    <strong>Delivery to client:</strong>
-    <%= pet.delivery_to_client %>
-  </p>
-
-  <p>
-    <strong>Insuranse:</strong>
-    <%= pet.insuranse %>
-  </p>
-
-  <p>
-    <strong>Image:</strong>
-    <%= pet.image %>
-  </p>
-
-  <p>
-    <strong>User:</strong>
-    <%= pet.user_id %>
-  </p>
-
+        <div class="col-md-6">
+          <div id="<%= dom_id pet %>">
+            <h2><%= pet.name %></h2>
+            <p>
+              <strong>Description:</strong>
+              <%= pet.description %>
+            </p>
+            <p>
+              <strong>Price:</strong>
+              <%= pet.price %>
+            </p>
+            <p>
+              <strong>Age:</strong>
+              <%= pet.age %>
+            </p>
+            <p>
+              <strong>Category:</strong>
+              <%= pet.category %>
+            </p>
+            <p>
+              <strong>Delivery to client:</strong>
+              <%= pet.delivery_to_client %>
+            </p>
+            <p>
+              <strong>Insurance:</strong>
+              <%= pet.insuranse %>
+            </p>
+            <p>
+              <strong>User ID:</strong>
+              <%= pet.user_id %>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

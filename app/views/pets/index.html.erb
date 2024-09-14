@@ -7,10 +7,10 @@
 </div>
 
 
-<div id="pets" class="card-deck d-flex justify-content-center">
+<div id="pets" class="d-flex flex-wrap justify-content-center gap-3 pb-4 w-100">
   <% @pets.each do |pet| %>
-     <div class="card w-25 m-3">
-      <%= image_tag(pet.image.present? ? pet.image : asset_path('default-img.png'), class: 'card-img-top', alt:  pet.name) %>
+    <div class="card" style="width: 300px; margin: 10px;">
+      <%= image_tag(pet.image.present? ? pet.image : asset_path('default-img.png'), class: 'card-img-top', alt: pet.name) %>
       <div class="card-body">
         <h5 class="card-title"><%= pet.name %></h5>
         <p class="card-text"><%= pet.description %></p>
@@ -21,6 +21,7 @@
     </div>
   <% end %>  
 </div>
+
 
 
 
