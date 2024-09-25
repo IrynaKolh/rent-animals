@@ -36,7 +36,9 @@
 
   <p>
     <strong>Image:</strong>
-    <%= pet.image %>
+    <% pet.image.each do |image| %>
+      <div><%= link_to image.filename, image %></div>
+    <% end %>
   </p>
 
   <p>

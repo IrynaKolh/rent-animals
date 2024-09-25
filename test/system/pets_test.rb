@@ -17,8 +17,6 @@ class PetsTest < ApplicationSystemTestCase
     fill_in "Age", with: @pet.age
     fill_in "Category", with: @pet.category
     check "Delivery to client" if @pet.delivery_to_client
-    fill_in "Description", with: @pet.description
-    fill_in "Image", with: @pet.image
     check "Insuranse" if @pet.insuranse
     fill_in "Name", with: @pet.name
     fill_in "Price", with: @pet.price
@@ -36,8 +34,6 @@ class PetsTest < ApplicationSystemTestCase
     fill_in "Age", with: @pet.age
     fill_in "Category", with: @pet.category
     check "Delivery to client" if @pet.delivery_to_client
-    fill_in "Description", with: @pet.description
-    fill_in "Image", with: @pet.image
     check "Insuranse" if @pet.insuranse
     fill_in "Name", with: @pet.name
     fill_in "Price", with: @pet.price

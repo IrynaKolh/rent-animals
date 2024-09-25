@@ -1,7 +1,7 @@
-<%= form_with(model: pet) do |form| %>
+<%= form_with(model: pet, local: true, class: "mt-3") do |form| %>
   <% if pet.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(pet.errors.count, "error") %> prohibited this pet from being saved:</h2>
+    <div class="alert alert-danger">
+      <h2 class="alert-heading"><%= pluralize(pet.errors.count, "error") %> prohibited this pet from being saved:</h2>
 
       <ul>
         <% pet.errors.each do |error| %>
@@ -11,52 +11,65 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+  <div class="form-group">
+    <%= form.label :name, class: "form-label" %>
+    <%= form.text_field :name, class: "form-control border border-secondary bg-light" %>
   </div>
 
-  <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.text_area :description %>
+  <div class="form-group">
+    <%= form.label :description, class: "form-label" %>
+    <%= form.rich_text_area :description, class: "form-control border border-secondary bg-light" %>
   </div>
 
-  <div>
-    <%= form.label :price, style: "display: block" %>
-    <%= form.text_field :price %>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= form.label :price, class: "form-label" %>
+        <%= form.text_field :price, class: "form-control border border-secondary bg-light" %>
+      </div>
+    </div>
+    
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= form.label :age, class: "form-label" %>
+        <%= form.number_field :age, class: "form-control border border-secondary bg-light" %>
+      </div>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :age, style: "display: block" %>
-    <%= form.number_field :age %>
+  <div class="form-group">
+    <%= form.label :category, class: "form-label" %>
+    <%= form.text_field :category, class: "form-control border border-secondary bg-light" %>
   </div>
 
-  <div>
-    <%= form.label :category, style: "display: block" %>
-    <%= form.text_field :category %>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= form.label :delivery_to_client, class: "form-label" %>
+        <%= form.check_box :delivery_to_client %>
+      </div>
+    </div>
+    
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= form.label :insuranse, class: "form-label"  %>
+        <%= form.check_box :insuranse %>
+      </div>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <%= form.label :image, class: "form-label"  %>
+    <%= form.file_field :image, multiple: true, class: "form-control border border-secondary bg-light" %>
   </div>
 
-  <div>
-    <%= form.label :delivery_to_client, style: "display: block" %>
-    <%= form.check_box :delivery_to_client %>
-  </div>
-
-  <div>
-    <%= form.label :insuranse, style: "display: block" %>
-    <%= form.check_box :insuranse %>
-  </div>
-
-  <div>
-    <%= form.label :image, style: "display: block" %>
-    <%= form.text_field :image %>
-  </div>
-
-  <div>
-    <%= form.label :user_id, style: "display: block" %>
-    <%= form.text_field :user_id %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+  <div class="mt-4">
+   <% if pet.new_record? %>
+      <%= form.submit "Save", class: "btn btn-primary" %>
+    <% else %>
+      <%= form.submit "Update", class: "btn btn-primary" %>
+      <%= link_to "Show this pet", @pet, class: "btn btn-secondary ml-5"  %> 
+    <% end %>
+    <%= link_to "Back to pets", pets_path, class: "btn btn-secondary ml-5" %>
   </div>
 <% end %>
