@@ -35,9 +35,15 @@
   </p>
 
   <p>
-    <strong>Image:</strong>
-    <% pet.image.each do |image| %>
-      <div><%= link_to image.filename, image %></div>
+    <% pet.image.each do |image| %>      
+      <% if @pet.image.any? %>
+      <%= image_tag @pet.image.first, class: "w-full h-96 object-cover" %>
+      <div class="grid grid-cols-3 gap-4 mt-4"> 
+        <% @pet.image[1..].each do |i| %>
+          <%= image_tag i, class: "w-full h-32 object-cover" %>
+        <% end %>
+      </div>
+    <% end %>
     <% end %>
   </p>
 
