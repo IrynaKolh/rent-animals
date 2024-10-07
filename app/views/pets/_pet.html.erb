@@ -1,55 +1,37 @@
 <div id="<%= dom_id pet %>">
-  <p>
-    <strong>Name:</strong>
-    <%= pet.name %>
-  </p>
+  <div class="row border border-dark rounded mx-5">
+    <div class="col-md-6">
+      <%= image_tag(pet.image.present? ? pet.image.first : asset_path('default-img.png'), class: "object-fit-cover", style: "max-width: 100%;") %>
+    </div>
 
-  <p>
-    <strong>Description:</strong>
-    <%= pet.description %>
-  </p>
+    <div class="col-md-6 my-5">
+      <h3 class="display-3" style="font-family: 'Nerko';"><%= pet.name %></h3>
+      <p>
+        <strong><%= pet.description %></strong>        
+      </p>
+      
+      <p>
+        <strong>Age:</strong>
+        <%= pet.age %>
+      </p>
+      <p>
+        <strong>Price:</strong>
+        <%= number_to_currency pet.price %>
+      </p>
 
-  <p>
-    <strong>Price:</strong>
-    <%= pet.price %>
-  </p>
+      <p>
+        <strong>User:</strong>
+        <%= pet.user_id %>
+      </p>
 
-  <p>
-    <strong>Age:</strong>
-    <%= pet.age %>
-  </p>
-
-  <p>
-    <strong>Category:</strong>
-    <%= pet.category %>
-  </p>
-
-  <p>
-    <strong>Delivery to client:</strong>
-    <%= pet.delivery_to_client %>
-  </p>
-
-  <p>
-    <strong>Insuranse:</strong>
-    <%= pet.insuranse %>
-  </p>
-
-  <p>
-    <% pet.image.each do |image| %>      
-      <% if @pet.image.any? %>
-      <%= image_tag @pet.image.first, class: "w-full h-96 object-cover" %>
-      <div class="grid grid-cols-3 gap-4 mt-4"> 
-        <% @pet.image[1..].each do |i| %>
-          <%= image_tag i, class: "w-full h-32 object-cover" %>
-        <% end %>
+      <div>
+        <% if user_signed_in? %>
+          <%= link_to "Edit", edit_pet_path(@pet), class: "btn btn-primary ml-5"  %>        
+          <%= link_to "Delete ", @pet, method: :delete, class: "btn btn-danger ml-5"  %>
+        <% end %>        
+         <%= link_to "Back to pets", pets_path, class: "btn btn-secondary ml-5"  %>
       </div>
-    <% end %>
-    <% end %>
-  </p>
+    </div>
 
-  <p>
-    <strong>User:</strong>
-    <%= pet.user_id %>
-  </p>
-
+  </div>
 </div>

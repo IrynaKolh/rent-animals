@@ -1,7 +1,9 @@
 <p style="color: green"><%= notice %></p>
 
+<% content_for :title, "Pets" %> 
+
 <div>
-  <h1>Pets</h1>
+  <h1 class="text-center">Our Animals</h1>
 
   <%= link_to "New pet", new_pet_path, class: "btn btn-primary" %>
 </div>
@@ -9,14 +11,15 @@
 
 <div id="pets" class="card-deck d-flex justify-content-center">
   <% @pets.each do |pet| %>
-     <div class="card w-25 m-3 bg-light">
-      <%= image_tag(pet.image.present? ? pet.image.first : asset_path('default-img.png'), class: 'card-img-top', alt:  pet.name) %>
+     <div class="card w-25 m-3 bg-light">      
       <div class="card-body">
-        <h5 class="card-title"><%= pet.name %></h5>
-        <p class="card-text"><%= pet.description %></p>
+      <%= link_to pet do %>
+        <%= image_tag(pet.image.present? ? pet.image.first : asset_path('default-img.png'), class: 'card-img-top object-fit-cover h-100', alt:  pet.name) %>
+      <% end %>
       </div>
       <div class="card-footer">
-        <small class="text-muted"><%= link_to "Show this pet", pet %></small>
+        <h5 class="card-title"><%= pet.name %></h5>
+        <p class="card-text"><%= pet.description %></p>
       </div>
     </div>
   <% end %>  
