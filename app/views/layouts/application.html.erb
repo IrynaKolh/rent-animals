@@ -44,9 +44,21 @@
               </li>
               <li class="nav-item mx-3">
                 <%= link_to "Our animals", pets_path, class: "btn btn-primary" %>             
-              </li>            
+              </li>   
+              <li class="nav-item mx-3">
+                <% if current_user.present? && current_user.seller? %>
+                  <%= link_to "My animals", my_pets_pets_path, class: "btn btn-primary" %> 
+                <% end %>              
+              </li>          
             </ul>            
           </div>
+
+          <% if current_user.present? && !current_user.seller? %>
+            <%= button_to 'Activate Account', activate_user_path(current_user), method: :patch, data: { confirm: 'Are you sure?' }, class: "btn btn-primary" %>
+          <% else %>
+           <%= link_to "Add new pet", new_pet_path, class: "btn btn-primary" %>
+          <% end %>  
+          
 
         </div>
       </nav>

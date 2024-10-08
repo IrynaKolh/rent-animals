@@ -1,0 +1,43 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "My Pets" %> 
+
+<div>
+  <h1 class="text-center">My Pets</h1>  
+</div>
+
+
+<div id="pets" class="d-flex justify-content-center">
+
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th>№</th>
+        <th>Image</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Age</th>
+        <th>Price</th>
+        <th colspan="3">Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+        <% @my_pets.each_with_index do |pet, index| %>
+         <tr class="align-middle">
+          <td><%= index + 1 %></td>
+          <td> <%= image_tag(pet.image.present? ? pet.image.first : asset_path('default-img.png'), class: "object-fit-cover", style: "height: 40px") %></td>
+          <td><%= pet.name %></td>
+          <td><%= pet.description %></td>
+          <td><%= pet.age %></td>
+          <td><%= number_to_currency pet.price %></td>
+          <td class="d-flex justify-content-center">
+            <%= link_to 'Show', pet_path(pet), class: "btn btn-primary mx-2" %>
+            <%= link_to 'Edit', edit_pet_path(pet), class: "btn btn-primary mx-2" %>         
+            <%= button_to "Delete", pet, method: :delete, form: { data: { turbo_confirm: 'Are you sure?' } }, class: "btn btn-danger mx-2" %>
+          </td>
+        </tr>       
+      <% end %>
+    </tbody>
+  </table>
+</div>
