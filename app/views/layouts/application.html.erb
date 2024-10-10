@@ -11,8 +11,8 @@
   </head>
 
   <body>
-    <div class="container-fluid">
-      <div class="container-fluid bg-dark d-flex p-1 ">
+    <div class="container-fluid m-0 p-0">
+      <div class="container-fluid bg-dark d-flex p-1">
         <form class="d-flex ms-auto">
           <input class="form-control me-2" type="text" placeholder="Search">
           <button class="btn btn-primary" type="button">Search</button>
@@ -27,7 +27,7 @@
       </div>   
      
       <div class="p-5 banner-background rounded">
-        <h1>Rent animals</h1>
+        <h1>PetRent</h1>
         <p>This is a sample application that association rent animals for your event.</p>
       </div>
 
@@ -62,10 +62,20 @@
 
         </div>
       </nav>
-
+    </div>
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
-    <%= yield %>
-    </div>
+
+    <main class=".main-content">
+       <%= yield %> 
+    </main>
+   
+
+    <footer class="container-fluid m-0 py-2 bg-dark mt-auto">
+      <p class="text-center text-light mb-0">
+        &copy; 2024 Iryna Kolhanova | 
+        <a href="https://github.com/IrynaKolh" target="_blank" class="text-light text-decoration-none">GitHub</a>
+      </p>
+    </footer>
   </body>
 </html>
