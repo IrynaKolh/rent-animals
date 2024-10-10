@@ -1,10 +1,17 @@
 class PetsController < ApplicationController
   before_action :authenticate_user!, except: ["index", "show"]
   before_action :set_pet, only: %i[ show edit update destroy ]
+  before_action :authorize_user, only: [:edit, :update, :destroy]
+
 
   # GET /pets or /pets.json
   def index
     @pets = Pet.all
+  end
+
+  def my_pets
+    @my_pets = Pet.where(user_id: current_user.id).order(created_at: :desc)
+    render :my_pets
   end
 
   # GET /pets/1 or /pets/1.json
@@ -39,6 +46,11 @@ class PetsController < ApplicationController
   # PATCH/PUT /pets/1 or /pets/1.json
   def update
     respond_to do |format|
+      # Если есть новые изображения, прикрепляем их
+      if params[:pet][:image].present? && params[:pet][:image] != [""]
+        @pet.image.attach(params[:pet][:image])
+      end
+  
       if @pet.update(pet_params)
         format.html { redirect_to pet_url(@pet), notice: "Pet was successfully updated." }
         format.json { render :show, status: :ok, location: @pet }
@@ -68,5 +80,12 @@ class PetsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def pet_params
       params.require(:pet).permit(:name, :description, :price, :age, :category, :delivery_to_client, :insuranse, image: [])
+    end
+
+    def authorize_user
+      @pet = Pet.find(params[:id])
+      unless @pet.user == current_user
+        redirect_to pets_path, alert: "You are not authorized to perform this action."
+      end
     end
 end

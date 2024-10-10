@@ -59,7 +59,14 @@
   </div>
   
   <div class="form-group">
-    <%= form.label :image, class: "form-label"  %>
+    <%= form.label :image, class: "form-label" %>
+    <% if @pet.image.attached? %>
+      <div class="mb-2">
+        <% @pet.image.each do |img| %>
+          <%= image_tag(img, class: "object-fit-cover", style: "width: 100px; height: 100px;") %>
+        <% end %>
+      </div>    
+    <% end %>
     <%= form.file_field :image, multiple: true, class: "form-control border border-secondary bg-light" %>
   </div>
 
@@ -70,6 +77,6 @@
       <%= form.submit "Update", class: "btn btn-primary" %>
       <%= link_to "Show this pet", @pet, class: "btn btn-secondary ml-5"  %> 
     <% end %>
-    <%= link_to "Back to pets", pets_path, class: "btn btn-secondary ml-5" %>
+    <%= link_to 'Back', my_pets_pets_path, class: "btn btn-secondary ml-5" %>
   </div>
 <% end %>

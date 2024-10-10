@@ -34,11 +34,19 @@
  :root {
     --bs-body-bg: #e0e0e0;
  }
+ * {
+  box-sizing: border-box;
+}
 
  body {
     font-family: 'NunitoSans';
-  }
-  
+    margin: 0; 
+    padding: 0; 
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }  
 
  .banner-background {
     background-image: url('banner.png');
@@ -48,3 +56,15 @@
     background-position: right;
   }
 
+  .hero-img {
+    background-image: url('circle.jpg'); 
+    background-repeat: no-repeat;
+    background-size: cover; 
+    background-position: center;
+    padding: 50px 0;    
+    text-align: center;    
+}
+.main-content {
+  flex-grow: 1;
+  scroll-behavior: smooth;
+}

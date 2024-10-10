@@ -1,7 +1,70 @@
-<% if user_signed_in? %>
-  <h1>Welcome, <%= current_user.email %></h1>
-  <%= link_to 'Sign out', destroy_user_session_path, data: { turbo_method: :delete } %>
-<% else %>
-  <h1>Home</h1>
-  <%= link_to 'Sign in', new_user_session_path %>
-<% end %>
+<div class="container-fluid w-full mx-0 p-0 my-2">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-10 col-lg-8">
+        <h1 class="text-center mb-5">Welcome to PetRent – Your Go-To Platform for Pet Rentals!</h1>
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <%= image_tag 'hero.jpg' , alt: 'PetRent hero image' , class: 'img-fluid' %>
+          </div>
+          <div class="col-md-6">
+            <p class='fs-5 text'>
+              Looking for a unique companion to enhance your photoshoot, event, or special day?
+              With PetRent, you can rent a wide variety of animals, from playful dogs to majestic horses,
+              and even cute little hamsters! Whether it's for a photoshoot, a birthday party, or a creative event,
+              our platform connects you with pet owners who are eager to share their lovable companions for an
+              unforgettable
+              experience.
+            </p>
+          </div>
+        </div>
+      </div>
+
+        <div class="row justify-content-center my-5">
+          <div class="col-12 col-md-10 col-lg-8">
+            <h4 class="mb-4 fw-bolder">How It Works:</h4>
+            <div class="row">
+              <ul class="list-unstyled row">
+                <li class="col-md-6 fs-5 text">
+                  <strong>For Pet Owners:</strong> Have a photogenic or well-behaved pet you'd like to share?
+                  Post a listing with photos, a description of your pet, and available rental times.
+                  You set the price and terms, and even offer delivery if you'd like!
+                </li>
+                <li class="col-md-6 fs-5 text">
+                  <strong>For Renters:</strong> Browse through a diverse selection of pets, read detailed descriptions,
+                  and find the perfect animal for your event. Submit a rental request and get ready to
+                  create amazing memories with your new furry, feathered, or scaly friend.
+                </li>
+              </ul>             
+            </div>
+             <p class="d-flex fs-5 text">
+                Whether you're looking for a playful puppy for an hour or a majestic horse for a day,
+                PetRent makes it easy to find the perfect companion for your next project.
+              </p>
+          </div>
+        </div>
+
+        <div class="container my-5 fs-5 text">
+          <div class="hero-img">
+              <h4 class="fw-bolder">Why Choose PetRent?</h4>
+              <ul class="list-group w-75 m-auto">
+                  <li class="mb-3 list-group-item">
+                      Wide Variety of Animals – From small pets like hamsters to large animals like horses,
+                      there's a perfect match for every need.
+                  </li>
+                  <li class="mb-3 list-group-item">
+                      Flexible Rental Options – Choose from hourly or daily rentals depending on your event or project.
+                  </li>
+                  <li class="mb-3 list-group-item">
+                      Convenient Delivery – Some pet owners offer delivery services right to your location, making the process
+                      hassle-free.
+                  </li>
+              </ul>             
+          </div>           
+        </div>
+
+        <p class="row justify-content-center fs-5">
+          Book your next furry, feathery, or scaly companion today and make your event one to remember with PetRent!
+        </p>
+
+    </div>
+  </div>
