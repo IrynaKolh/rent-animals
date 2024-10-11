@@ -9,7 +9,7 @@
 
 <div id="pets" class="card-deck d-flex justify-content-center">
   <% @pets.each do |pet| %>
-     <div class="card w-25 m-3 bg-light">      
+     <div class="card m-3 bg-light" style="width: 18rem;">      
       <div class="card-body">
       <%= link_to pet do %>
         <%= image_tag(pet.image.present? ? pet.image.first : asset_path('default-img.png'), class: 'card-img-top object-fit-cover h-100', alt:  pet.name) %>
@@ -17,7 +17,7 @@
       </div>
       <div class="card-footer">
         <h5 class="card-title"><%= pet.name %></h5>
-        <p class="card-text"><%= pet.description %></p>
+        <p class="card-text"><%= number_to_currency pet.price %> per/hour </p>
       </div>
     </div>
   <% end %>  

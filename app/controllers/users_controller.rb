@@ -3,11 +3,12 @@ class UsersController < ApplicationController
   
     def activate
       @user = User.find(params[:id])
-      if @user.update(seller: true)
+      if @user.update_column(:seller, true) # Skips validation
         redirect_to pets_path, notice: "User was successfully activated."
       else
         redirect_to root_path, alert: "User activation failed."
       end
-    end
+    end    
+    
   end
   

@@ -24,5 +24,7 @@ module RentAnimals
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
     config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use ActionDispatch::Session::CookieStore
   end
 end

@@ -7,10 +7,10 @@
 </div>
 
 
-<div id="pets" class="d-flex justify-content-center">
+<div id="pets" class="table-responsive ">
 
 <table class="table table-striped">
-    <thead>
+    <thead class="table-light">
       <tr>
         <th>№</th>
         <th>Image</th>
@@ -18,7 +18,7 @@
         <th>Description</th>
         <th>Age</th>
         <th>Price</th>
-        <th colspan="3">Actions</th>
+        <th colspan="3"></th>
       </tr>
     </thead>
 
@@ -31,10 +31,12 @@
           <td><%= pet.description %></td>
           <td><%= pet.age %></td>
           <td><%= number_to_currency pet.price %></td>
-          <td class="d-flex justify-content-center">
-            <%= link_to 'Show', pet_path(pet), class: "btn btn-primary mx-2" %>
-            <%= link_to 'Edit', edit_pet_path(pet), class: "btn btn-primary mx-2" %>         
-            <%= button_to "Delete", pet, method: :delete, form: { data: { turbo_confirm: 'Are you sure?' } }, class: "btn btn-danger mx-2" %>
+          <td class="text-center">
+            <div class="btn-group">
+              <%= link_to 'Show', pet_path(pet), class: "btn btn-primary mx-1" %>
+              <%= link_to 'Edit', edit_pet_path(pet), class: "btn btn-primary mx-1" %>         
+              <%= button_to "Delete", pet, method: :delete, form: { data: { turbo_confirm: 'Are you sure?' } }, class: "btn btn-danger mx-1" %>
+            </div>
           </td>
         </tr>       
       <% end %>
