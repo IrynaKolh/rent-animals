@@ -11,8 +11,8 @@
   </head>
 
   <body>
-    <div class="container-fluid">
-      <div class="container-fluid bg-dark d-flex p-1 ">
+    <div class="container-fluid m-0 p-0">
+      <div class="container-fluid bg-dark d-flex p-1">
         <form class="d-flex ms-auto">
           <input class="form-control me-2" type="text" placeholder="Search">
           <button class="btn btn-primary" type="button">Search</button>
@@ -27,7 +27,7 @@
       </div>   
      
       <div class="p-5 banner-background rounded">
-        <h1>Rent animals</h1>
+        <h1>PetRent</h1>
         <p>This is a sample application that association rent animals for your event.</p>
       </div>
 
@@ -44,16 +44,38 @@
               </li>
               <li class="nav-item mx-3">
                 <%= link_to "Our animals", pets_path, class: "btn btn-primary" %>             
-              </li>            
+              </li>   
+              <li class="nav-item mx-3">
+                <% if current_user.present? && current_user.seller? %>
+                  <%= link_to "My animals", my_pets_pets_path, class: "btn btn-primary" %> 
+                <% end %>              
+              </li>          
             </ul>            
           </div>
 
+          <% if current_user.present? && !current_user.seller? %>
+            <%= button_to 'Activate Account', activate_user_path(current_user), method: :patch, data: { confirm: 'Are you sure?' }, class: "btn btn-primary" %>
+          <% else %>
+           <%= link_to "Add new pet", new_pet_path, class: "btn btn-primary" %>
+          <% end %>  
+          
+
         </div>
       </nav>
-
+    </div>
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
-    <%= yield %>
-    </div>
+
+    <main class=".main-content">
+       <%= yield %> 
+    </main>
+   
+
+    <footer class="container-fluid m-0 py-2 bg-dark mt-auto">
+      <p class="text-center text-light mb-0">
+        &copy; 2024 Iryna Kolhanova | 
+        <a href="https://github.com/IrynaKolh" target="_blank" class="text-light text-decoration-none">GitHub</a>
+      </p>
+    </footer>
   </body>
 </html>

@@ -38,8 +38,8 @@
   </div>
 
   <div class="form-group">
-    <%= form.label :category, class: "form-label" %>
-    <%= form.text_field :category, class: "form-control border border-secondary bg-light" %>
+    <%= form.label :category, "Category", class: "form-label" %>
+    <%= form.select :category, options_for_select(Pet.categories.keys.map { |category| [category.humanize, category] }, @pet.category), { include_blank: "Choose..." }, class: "form-control border border-secondary bg-light" %>
   </div>
 
   <div class="row">
@@ -59,17 +59,26 @@
   </div>
   
   <div class="form-group">
-    <%= form.label :image, class: "form-label"  %>
-    <%= form.file_field :image, multiple: true, class: "form-control border border-secondary bg-light" %>
+    <%= form.label :image, class: "form-label" %>
+    <% if @pet.image.attached? %>
+      <div class="mb-2">
+        <% @pet.image.each do |img| %>
+          <%= image_tag(img, class: "object-fit-cover", style: "width: 100px; height: 100px;") %>
+        <% end %>
+      </div>
+      <p> <strong> <%= @pet.image.map(&:filename).join(', ') %> </strong> </p>
+    <% end %>
+    <%= form.file_field :image, multiple: true, class: "form-control border border-secondary bg-light", id: "fileInput" %>
   </div>
 
-  <div class="mt-4">
+
+  <div class="my-4">
    <% if pet.new_record? %>
       <%= form.submit "Save", class: "btn btn-primary" %>
     <% else %>
       <%= form.submit "Update", class: "btn btn-primary" %>
       <%= link_to "Show this pet", @pet, class: "btn btn-secondary ml-5"  %> 
     <% end %>
-    <%= link_to "Back to pets", pets_path, class: "btn btn-secondary ml-5" %>
+    <%= link_to 'Back', my_pets_pets_path, class: "btn btn-secondary ml-5" %>
   </div>
 <% end %>

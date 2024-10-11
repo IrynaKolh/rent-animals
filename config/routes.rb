@@ -1,6 +1,16 @@
 Rails.application.routes.draw do
-  resources :pets
+  resources :pets do
+    collection do
+      get 'my_pets', as: 'my_pets'
+    end
+  end
   devise_for :users
+  resources :users, only: [] do
+    member do
+      patch :activate
+    end
+  end
+  
   root 'pages#index'
   get 'pages/index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

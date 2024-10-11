@@ -72,3 +72,7 @@ gem "bootstrap", "~> 5.3"
 
 # Use Sass to process CSS
 gem "sassc-rails"
+
+gem "email_validator", "~> 2.2"
+
+gem "strong_password", "~> 0.0.10"

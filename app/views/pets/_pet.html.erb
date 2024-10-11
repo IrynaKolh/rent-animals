@@ -1,7 +1,9 @@
-<div id="<%= dom_id pet %>">
-  <div class="row border border-dark rounded mx-5">
-    <div class="col-md-6">
-      <%= image_tag(pet.image.present? ? pet.image.first : asset_path('default-img.png'), class: "object-fit-cover", style: "max-width: 100%;") %>
+<div id="<%= dom_id pet %>" class="container-fluid my-5">
+  <div class="row mx-5">
+    <div class="col-md-6 text-center">
+      <%= image_tag(pet.image.present? ? pet.image.first : asset_path('default-img.png'), 
+      style: "max-width: 100%; height: 500px; object-fit: cover;") 
+      %>
     </div>
 
     <div class="col-md-6 my-5">
@@ -16,16 +18,16 @@
       </p>
       <p>
         <strong>Price:</strong>
-        <%= number_to_currency pet.price %>
+        <%= number_to_currency pet.price %> per/hour
       </p>
 
-      <p>
-        <strong>User:</strong>
-        <%= pet.user_id %>
-      </p>
-
+      <ul>
+        <% if pet.delivery_to_client %><li>Delivery to client</li> <% end %>
+        <% if pet.insuranse %><li>Have pet insurance </li> <% end %>
+      </ul>
+     
       <div>
-        <% if user_signed_in? %>
+        <% if user_signed_in? && pet.user == current_user  %>
           <%= link_to "Edit", edit_pet_path(@pet), class: "btn btn-primary ml-5"  %>        
           <%= link_to "Delete ", @pet, method: :delete, class: "btn btn-danger ml-5"  %>
         <% end %>        
