@@ -1,24 +1,30 @@
 <p style="color: green"><%= notice %></p>
 
 <% content_for :title, "Pets" %> 
-
 <div>
   <h1 class="text-center">Our Animals</h1>
 </div>
 
-
-<div id="pets" class="card-deck d-flex justify-content-center">
-  <% @pets.each do |pet| %>
-     <div class="card m-3 bg-light" style="width: 18rem;">      
-      <div class="card-body">
-      <%= link_to pet do %>
-        <%= image_tag(pet.image.present? ? pet.image.first : asset_path('default-img.png'), class: 'card-img-top object-fit-cover h-100', alt:  pet.name) %>
-      <% end %>
+<div id="pets" class="card-deck row justify-content-center">
+  <% if @pets.any? %>
+    <% @pets.each do |pet| %>
+      <div class="card m-3 bg-light" style="width: 18rem;">      
+        <div class="card-body">
+          <%= link_to pet do %>
+            <%= image_tag(pet.image.present? ? pet.image.first : asset_path('default-img.png'), class: 'card-img-top object-fit-cover h-100', alt:  pet.name) %>
+          <% end %>
+        </div>
+        <div class="card-footer">
+          <h5 class="card-title"><%= pet.name %></h5>
+          <p class="card-text"><%= number_to_currency pet.price %> per hour</p>
+        </div>
       </div>
-      <div class="card-footer">
-        <h5 class="card-title"><%= pet.name %></h5>
-        <p class="card-text"><%= number_to_currency pet.price %> per/hour </p>
-      </div>
+    <% end %>
+  <% else %>
+    <div class="text-center my-5">
+      <h4>No pets found for your search</h4>
+      <p>Try searching for a different name, breed, or description.</p>
     </div>
-  <% end %>  
+  <% end %>
 </div>
+

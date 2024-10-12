@@ -7,7 +7,7 @@
 </div>
 
 
-<div id="pets" class="table-responsive ">
+<div id="pets" class="table-responsive mx-md-5 mx-0">
 
 <table class="table table-striped">
     <thead class="table-light">
@@ -26,7 +26,10 @@
         <% @my_pets.each_with_index do |pet, index| %>
          <tr class="align-middle">
           <td><%= index + 1 %></td>
-          <td> <%= image_tag(pet.image.present? ? pet.image.first : asset_path('default-img.png'), class: "object-fit-cover", style: "height: 40px") %></td>
+          <td>
+            <%= image_tag(pet.image.present? ? pet.image.first : asset_path('default-img.png'), 
+            style: "width: 60px; height: 60px; object-fit: cover; object-position: center;") %>
+          </td>
           <td><%= pet.name %></td>
           <td><%= pet.description %></td>
           <td><%= pet.age %></td>
