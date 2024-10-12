@@ -6,7 +6,7 @@ class PetsController < ApplicationController
 
   # GET /pets or /pets.json
   def index
-    @pets = Pet.all
+    @pets = Pet.page(params[:page]).per(10)
   end
 
   def search
@@ -14,11 +14,11 @@ class PetsController < ApplicationController
       @pets = Pet.joins(:rich_text_description).where(
         "pets.name LIKE ? OR pets.category LIKE ? OR action_text_rich_texts.body LIKE ?",
         "%#{params[:query]}%", "%#{params[:query]}%", "%#{params[:query]}%"
-      )
+      ).page(params[:page]).per(10)  # Добавляем пагинацию здесь
     else
-      @pets = Pet.all
+      @pets = Pet.all.page(params[:page]).per(10)  # Обеспечиваем пагинацию и для всех питомцев
     end
-
+  
     render :index
   end
   
