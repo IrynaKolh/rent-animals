@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :pets do
     collection do
       get 'my_pets', as: 'my_pets'
+      get 'search'
     end
   end
   devise_for :users

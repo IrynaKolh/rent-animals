@@ -2,13 +2,26 @@ class PetsController < ApplicationController
   before_action :authenticate_user!, except: ["index", "show"]
   before_action :set_pet, only: %i[ show edit update destroy ]
   before_action :authorize_user, only: [:edit, :update, :destroy]
-
+  before_action :check_seller, only: [:new, :create, :edit, :update]
 
   # GET /pets or /pets.json
   def index
     @pets = Pet.all
   end
 
+  def search
+    if params[:query].present?
+      @pets = Pet.joins(:rich_text_description).where(
+        "pets.name LIKE ? OR pets.category LIKE ? OR action_text_rich_texts.body LIKE ?",
+        "%#{params[:query]}%", "%#{params[:query]}%", "%#{params[:query]}%"
+      )
+    else
+      @pets = Pet.all
+    end
+
+    render :index
+  end
+  
   def my_pets
     @my_pets = Pet.where(user_id: current_user.id).order(created_at: :desc)
     render :my_pets
@@ -86,6 +99,12 @@ class PetsController < ApplicationController
       @pet = Pet.find(params[:id])
       unless @pet.user == current_user
         redirect_to pets_path, alert: "You are not authorized to perform this action."
+      end
+    end
+
+    def check_seller
+      unless current_user.seller?
+        redirect_to pets_path, alert: "You must activate your seller account to add or edit pets."
       end
     end
 end
