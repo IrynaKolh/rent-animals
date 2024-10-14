@@ -14,7 +14,7 @@
     <div class="container-fluid m-0 p-0">
       <div class="container-fluid bg-dark d-flex p-1">  
         <%= form_with(url: search_pets_path, method: :get, local: true, class: "d-flex ms-auto") do %>
-          <%= text_field_tag :query, params[:query], placeholder: 'Search by breed, keyword' %>
+          <%= text_field_tag :query, params[:query], placeholder: 'Search by keyword' %>
           <%= submit_tag 'Search', class: "btn btn-primary" %>
         <% end %>        
 
@@ -67,7 +67,7 @@
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
 
-    <main class=".main-content">
+    <main class="main-content">
        <%= yield %> 
     </main>
    
