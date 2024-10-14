@@ -6,20 +6,48 @@ class PetsController < ApplicationController
 
   # GET /pets or /pets.json
   def index
-    @pets = Pet.page(params[:page]).per(10)
-  end
+    @pets = Pet.all
 
-  def search
     if params[:query].present?
       @pets = Pet.joins(:rich_text_description).where(
         "pets.name LIKE ? OR pets.category LIKE ? OR action_text_rich_texts.body LIKE ?",
         "%#{params[:query]}%", "%#{params[:query]}%", "%#{params[:query]}%"
-      ).page(params[:page]).per(10)  # Добавляем пагинацию здесь
-    else
-      @pets = Pet.all.page(params[:page]).per(10)  # Обеспечиваем пагинацию и для всех питомцев
+      )     
     end
-  
-    render :index
+
+    if params[:category].present?
+      @pets = @pets.where(category: params[:category])
+    end
+
+    if params[:sort].present?
+      @pets = case params[:sort]
+              when 'price_asc'
+                @pets.order(price: :asc)
+              when 'price_desc'
+                @pets.order(price: :desc)
+              else
+                @pets
+              end
+    end
+
+    if params[:min_price].present?
+      @pets = @pets.where('price >= ?', params[:min_price])
+    end
+
+    if params[:max_price].present?
+      @pets = @pets.where('price <= ?', params[:max_price])
+    end
+
+    @pets = @pets.page(params[:page]).per(12)
+  end
+
+  def search
+    if params[:query].present?      
+      redirect_to pets_path(params.permit(:query, :category, :sort, :min_price, :max_price))  
+    else
+      @pets = @pets.page(params[:page]).per(12)
+      render :index
+    end
   end
   
   def my_pets
@@ -59,7 +87,6 @@ class PetsController < ApplicationController
   # PATCH/PUT /pets/1 or /pets/1.json
   def update
     respond_to do |format|
-      # Если есть новые изображения, прикрепляем их
       if params[:pet][:image].present? && params[:pet][:image] != [""]
         @pet.image.attach(params[:pet][:image])
       end
@@ -92,7 +119,9 @@ class PetsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def pet_params
-      params.require(:pet).permit(:name, :description, :price, :age, :category, :delivery_to_client, :insuranse, image: [])
+      params.require(:pet).permit(:name, :description, :price, :age, :category, :delivery_to_client, :insuranse, image: []).tap do |whitelisted|
+        whitelisted.merge!(params.permit(:category, :sort, :min_price, :max_price, :query, :page))
+      end
     end
 
     def authorize_user

@@ -11,7 +11,7 @@
 - [x] At least one association is required (one-to-many or many-to-many). Please don’t make this too simple. More models, nested associations, or many-to-many associations are encouraged.
 - [x] Validation of your attributes to prevent the creation of invalid records
 - [x] Implement all the CRUD (create, read, update, delete) operations for your models in your controllers
-- [x] Bonus: Implement some non-CRUD operations (sorting, paging, search)
+- [x] Bonus: Implement some non-CRUD operations (sorting, paging, search, filters)
 
 ### Views
 - [x] Implement the views for the CRUD operations for each model:
@@ -25,7 +25,7 @@
 - [x] The application should be attractive with the inclusion of images, color, fonts, and other CSS styling.
 
 ### Testing
-- [ ] Include at least some minimal testing using Rspec for some of the CRUD operations.
+- [x] Include at least some minimal testing using Rspec for some of the CRUD operations.
 
 ### Bonus
 - [x] Do something extra. This could be the implementation of a more complicated data model, the use of gems such as Devise for authentication or Active Storage for file storage, or implementing a REST API with a front end — your choice, whatever fits for the application.
