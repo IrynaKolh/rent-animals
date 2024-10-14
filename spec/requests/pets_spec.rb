@@ -10,7 +10,7 @@ RSpec.describe "Pets", type: :request do
   describe "GET /pets" do
 
     before do
-      @pets = FactoryBot.create_list(:pet, 10, user: user)
+      @pets = FactoryBot.create_list(:pet, 12, user: user)
     end
 
     it "returns a successful response" do
@@ -21,7 +21,7 @@ RSpec.describe "Pets", type: :request do
     it "returns a list of pets" do
       get pets_path
       expect(response).to render_template(:index)
-      expect(assigns(:pets).length).to eq(10)
+      expect(assigns(:pets).length).to eq(12)
     end
   end
 

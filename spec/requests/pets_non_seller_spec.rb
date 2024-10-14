@@ -4,7 +4,7 @@ RSpec.describe "Pets Non-Seller Requests", type: :request do
     before(:each) do
         ActiveRecord::Base.transaction do
           @seller = FactoryBot.create(:user, seller: true)
-          @pets = FactoryBot.create_list(:pet, 10, user: @seller)
+          @pets = FactoryBot.create_list(:pet, 12, user: @seller)
         end
     end
 
@@ -12,7 +12,7 @@ RSpec.describe "Pets Non-Seller Requests", type: :request do
     it "allows non-sellers to view pets" do
       get pets_path
       expect(response).to have_http_status(:success)
-      expect(assigns(:pets).length).to eq(10)
+      expect(assigns(:pets).length).to eq(12)
     end
   end
 

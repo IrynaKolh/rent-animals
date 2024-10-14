@@ -1,33 +1,99 @@
 <p style="color: green"><%= notice %></p>
 
-<% content_for :title, "Pets" %> 
-<div>
-  <h1 class="text-center">Our Animals</h1>
+<% content_for :title, "Pets" %>
+
+<div class="text-center">
+  <h1>Our Animals</h1>
 </div>
 
-<div id="pets" class="card-deck row justify-content-center">
-  <% if @pets.any? %>
-    <% @pets.each do |pet| %>
-      <div class="card m-3 bg-light" style="width: 18rem;">      
-        <div class="card-body">
-          <%= link_to pet do %>
-            <%= image_tag(pet.image.present? ? pet.image.first : asset_path('default-img.png'), class: 'card-img-top object-fit-cover h-100', alt:  pet.name) %>
-          <% end %>
-        </div>
-        <div class="card-footer">
-          <h5 class="card-title"><%= pet.name %></h5>
-          <p class="card-text"><%= number_to_currency pet.price %> per hour</p>
+<div class="container-fluid">
+  <div class="row mx-4">
+    <!-- Sidebar -->
+    <div class="col-lg-2 col-md-3 mb-4">
+      <h2 class="mb-4">Filter</h2>
+
+      <!-- Sort by Category -->
+      <div class="mb-4">
+        <h4>Category</h4>
+        <div class="dropdown">
+          <button class="btn btn-primary dropdown-toggle" type="button" id="categoryDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            Select Category
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="categoryDropdown">
+            <% Pet.categories.each do |key, value| %>
+              <li>
+                <%= link_to key.capitalize, pets_path(params.permit(:sort, :min_price, :max_price, :query).merge(category: key)), class: "dropdown-item" %>
+              </li>
+            <% end %>
+          </ul>
         </div>
       </div>
-    <% end %>
-  <% else %>
-    <div class="text-center my-5">
-      <h4>No pets found for your search</h4>
-      <p>Try searching for a different name, breed, or description.</p>
-    </div>
-  <% end %>
-</div>
 
-<div class="pagination justify-content-center">
-  <%= paginate @pets %>
+      <!-- Sorting filter -->
+      <div class="mt-3">
+        <h5>Sort by Price</h5>
+        <%= link_to 'Low to High', pets_path(params.permit(:category, :min_price, :max_price, :query).merge(sort: 'price_asc')), class: 'btn btn-outline-primary btn-block' %>
+        <%= link_to 'High to Low', pets_path(params.permit(:category, :min_price, :max_price, :query).merge(sort: 'price_desc')), class: 'btn btn-outline-primary btn-block my-2' %>
+      </div>
+
+      <div class="mb-4">
+        <h4>Price Range</h4>
+        <form action="<%= pets_path %>" method="get">
+          <%= hidden_field_tag :category, params[:category] %>
+          <%= hidden_field_tag :sort, params[:sort] %>
+           <%= hidden_field_tag :query, params[:query] %>
+          <div class="row align-items-end">
+            <div class="form-group col-md-5 mb-0">
+              <label for="min_price">From</label>
+              <input type="number" name="min_price" id="min_price" class="form-control bg-light" value="<%= params[:min_price] %>" min="0">
+            </div>
+            <div class="form-group col-md-5 mb-0">
+              <label for="max_price">To</label>
+              <input type="number" name="max_price" id="max_price" class="form-control bg-light" value="<%= params[:max_price] %>" min="0">
+            </div>
+            <div class="form-group col-md-2 mb-0">
+              <button type="submit" class="btn btn-primary">Apply</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- Reset Filters Button -->
+      <div class="mb-4">
+        <%= link_to 'Reset Filters', pets_path, class: 'btn btn-secondary' %>
+      </div>
+
+    </div>
+
+    <!-- Main Content -->
+    <div class="col-lg-10 col-md-9">  
+      <div id="pets" class="card-deck row justify-content-center">
+      <% if @pets.any? %>
+        <% @pets.each do |pet| %>
+          <div class="card m-3 bg-light" style="width: 20rem;">      
+            <div class="card-body">
+              <%= link_to pet do %>
+                <%= image_tag(pet.image.present? ? pet.image.first : asset_path('default-img.png'), class: 'card-img-top object-fit-cover h-100', alt: pet.name) %>
+              <% end %>
+            </div>
+            <div class="card-footer">
+              <h5 class="card-title"><%= pet.name %></h5>
+              <p class="card-text"><%= number_to_currency pet.price %> per hour</p>
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <div class="text-center my-5">
+          <h4>No pets found for your search</h4>
+          <p>Try searching for a different name, breed, or description.</p>
+        </div>
+      <% end %>
+    </div>
+
+      <!-- Pagination -->
+      <div class="pagination justify-content-center">
+        <%= paginate @pets %>
+      </div>
+    </div>
+  </div>
 </div>
