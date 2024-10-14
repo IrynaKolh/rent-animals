@@ -19,7 +19,7 @@
         <% end %>        
 
         <% if user_signed_in? %>
-          <p class="text-white text-center"><%= current_user.email %></p>
+          <p class="text-white align-self-center"><%= current_user.email %></p>
           <%= link_to 'Exit', destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-primary mx-3" %>
         <% else %>
           <h1>Home</h1>
@@ -63,11 +63,22 @@
 
         </div>
       </nav>
-    </div>
-      <p class="notice" style="color: green"><%= notice %></p> 
-      <p class="alert" style="color: red"><%= alert %></p>
+    </div>  
+    <main class="main-content" style="position: relative">
+      <% if notice %>
+          <div class="alert alert-success" role="alert" style="width: 300px; position: absolute; top: 20px; right: 20px;">        
+          <%= notice %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        <% end %>
 
-    <main class="main-content">
+        <% if alert %>
+          <div class="alert alert-danger" role="alert" style="width: 300px; position: absolute; top: 20px; right: 20px;">
+            <%= alert %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        <% end %>
+
        <%= yield %> 
     </main>
    
@@ -78,5 +89,6 @@
         <a href="https://github.com/IrynaKolh" target="_blank" class="text-light text-decoration-none">GitHub</a>
       </p>
     </footer>
+    
   </body>
 </html>
