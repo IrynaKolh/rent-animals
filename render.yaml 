@@ -1,0 +1,24 @@
+databases:
+  - name: rent-animals
+    engine: postgres
+    databaseName: rent_animals_development
+    user: rent-animals
+    plan: free
+
+services:
+  - type: web
+    name: rent-animals
+    runtime: ruby
+    plan: free
+    buildCommand: "./bin/render-build.sh"
+    # preDeployCommand: "bundle exec rails db:migrate" # preDeployCommand only available on paid instance types
+    startCommand: "bundle exec rails server"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: rent-animals
+          property: connectionString
+      - key: RAILS_MASTER_KEY
+        sync: false
+      - key: WEB_CONCURRENCY
+        value: 2 # sensible default
