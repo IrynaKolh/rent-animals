@@ -1,9 +1,7 @@
-<p style="color: green"><%= notice %></p>
-
 <% content_for :title, "My Pets" %> 
 
 <div>
-  <h1 class="text-center">My Pets</h1>  
+  <h1 class="text-center my-5">My Pets</h1>  
 </div>
 
 
@@ -38,10 +36,11 @@
             <div class="btn-group">
               <%= link_to 'Show', pet_path(pet), class: "btn btn-primary mx-1" %>
               <%= link_to 'Edit', edit_pet_path(pet), class: "btn btn-primary mx-1" %>         
-              <%= button_to "Delete", pet, method: :delete, form: { data: { turbo_confirm: 'Are you sure?' } }, class: "btn btn-danger mx-1" %>
+              <%= link_to "Delete", "#", class: "btn btn-danger mx-1", data: { bs_toggle: "modal", bs_target: "#myModal-#{pet.id}" } %>
             </div>
           </td>
-        </tr>       
+        </tr> 
+        <%= render "pets/deleteModal", pet: pet %>      
       <% end %>
     </tbody>
   </table>
