@@ -19,10 +19,9 @@
         <% end %>        
 
         <% if user_signed_in? %>
-          <p class="text-white align-self-center"><%= current_user.email %></p>
-          <%= link_to 'Exit', destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-primary mx-3" %>
-        <% else %>
-          <h1>Home</h1>
+            <div class="text-white align-self-center"><%= current_user.email %></div>
+          <%= link_to 'Logout', destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-primary mx-3" %>
+        <% else %>   
           <%= link_to 'Login', new_user_session_path, class: "btn btn-primary mx-3"  %>
         <% end %>        
       </div>   
