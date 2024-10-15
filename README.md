@@ -5,14 +5,13 @@ This is the final project for the Code The Dream Ruby on Rails class.
 ## Technologies:
 
 - Ruby on Rails app
-- PostgreSQL
 - Active Storage for images storage.
 - Devise for authentication 
 - Bootstrap styling
 
 ## Links
 
-This project deployed here: 
+This project deployed here: -
 
 ## Project Requirements Checklist:
 
