@@ -1,17 +1,31 @@
-# Project Requirements Checklist
+# PetRent 
 
-## Requirements for the Project (Rubric)
+This is the final project for the Code The Dream Ruby on Rails class.
+
+## Technologies:
+
+- Ruby on Rails app
+- PostgreSQL
+- Active Storage for images storage.
+- Devise for authentication 
+- Bootstrap styling
+
+## Links
+
+This project deployed here: 
+
+## Project Requirements Checklist:
 
 ### General Requirements
 - [x] Create a full Rails application from scratch using ActiveRecord and a database. It must contain the following elements:
 
 ### Models & Controllers
-- [x] At least two ActiveRecord models
+- [x] At least two ActiveRecord models - User and Pet
 - [x] Model attributes should use different data types (integer, string, boolean, etc.)
 - [x] At least one association is required (one-to-many or many-to-many). Please don’t make this too simple. More models, nested associations, or many-to-many associations are encouraged.
 - [x] Validation of your attributes to prevent the creation of invalid records
 - [x] Implement all the CRUD (create, read, update, delete) operations for your models in your controllers
-- [x] Bonus: Implement some non-CRUD operations (sorting, paging, search, filters)
+- [x] Bonus: Implement some non-CRUD operations (sorting, pagination, search, filters)
 
 ### Views
 - [x] Implement the views for the CRUD operations for each model:

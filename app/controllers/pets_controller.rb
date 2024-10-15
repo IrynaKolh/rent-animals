@@ -1,5 +1,5 @@
 class PetsController < ApplicationController
-  before_action :authenticate_user!, except: ["index", "show"]
+  before_action :authenticate_user!, except: ["index", "show", "search"]
   before_action :set_pet, only: %i[ show edit update destroy ]
   before_action :authorize_user, only: [:edit, :update, :destroy]
   before_action :check_seller, only: [:new, :create, :edit, :update]
