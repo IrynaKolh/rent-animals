@@ -2,9 +2,19 @@
 
 This is the final project for the Code The Dream Ruby on Rails class.
 
+### Installation Instructions: 
+- Clone the repository to your local machine.
+- Install the required gems by running: ```bundle install```.
+- Set up the database: ```rails db:create``` and ```rails db:migrate```
+### Running Instructions: 
+- Start the server by running: ```rails server```
+### Usage Details:
+- Access the application in your web browser at: ```localhost:3000```.
+
 ## Technologies:
 
 - Ruby on Rails app
+- SQLite and ActiveRecord
 - Active Storage for images storage.
 - Devise for authentication 
 - Bootstrap styling
